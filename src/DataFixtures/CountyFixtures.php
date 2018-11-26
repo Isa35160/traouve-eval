@@ -12,10 +12,10 @@ class CountyFixtures extends Fixture
     public function load(ObjectManager $manager)
 
     { $counties = [
-        ["Ille et Vilaine", "35000" ],
+        ["Ille-et-Vilaine", "35000" ],
         ["Finistere", "29000" ],
         ["Morbihan", "56000" ],
-        ["Cotes d'Armor", "22000" ],
+        ["Cotes-Armor", "22000" ],
 
     ];
 

@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Traobject
  *
  * @ORM\Table(name="traobject", indexes={@ORM\Index(name="fk_traobject_category_idx", columns={"category_id"}), @ORM\Index(name="fk_traobject_state1_idx", columns={"state_id"}), @ORM\Index(name="fk_traobject_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_traobject_county1_idx", columns={"county_id"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Traobject
 {
@@ -69,6 +71,10 @@ class Traobject
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+
+
+
+
 
     /**
      * @var \DateTime
@@ -211,6 +217,19 @@ class Traobject
         $this->address = $address;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function setUpdateAtValue()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

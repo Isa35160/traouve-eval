@@ -27,18 +27,16 @@ class UserFixtures extends Fixture
         $admin->setFirstname("Isa");
         $admin->setLastname("Teix");
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, "123456"));
-        $admin->setRoles(["ROLE_ADMIN"]);
         $manager->persist($admin);
 
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
             $user->setPassword($this->passwordEncoder->encodePassword($user, "pass"));
-            $user->setRoles(["ROLE_USER"]);
             $manager->persist($user);
             $this->addReference('user-' . ($i + 1), $user);
         }
