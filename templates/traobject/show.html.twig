@@ -1,58 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Traobject{% endblock %}
+{% block title %} <title>{{ traobject.title }}</title> {% endblock %}
 
 {% block body %}
-    <h1>Traobject</h1>
+    <main class="main-content">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ traobject.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ traobject.title }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ traobject.picture }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ traobject.description }}</td>
-            </tr>
-            <tr>
-                <th>EventAt</th>
-                <td>{{ traobject.eventAt ? traobject.eventAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateEnd</th>
-                <td>{{ traobject.dateEnd ? traobject.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ traobject.city }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ traobject.address }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ traobject.createdAt ? traobject.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ traobject.updatedAt ? traobject.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="container">
+            <div class="card object-card">
+                <h1 class="card-header">
+                <span class="badge badge-primary {{ traobject.state.color }}">
+                    <i class="fa fa-map-pin"></i>
+                    {{ traobject.state.label }}
+                </span>
+                    {{ traobject.title }}
+                </h1>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ asset('uploads/' ~ traobject.picture) }}" class="img-thumbnail" alt="{{ traobject.category.label }}">
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{ traobject.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <ul class="object-features">
+                        <li><a href="#" class="badge" style="background-color: {{ traobject.category.color }};"><i class="fa {{ traobject.category.icon }}"></i> {{ traobject.category.label }}</a></li>
+                        <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> {{ traobject.eventAt|date("d M Y") }}</a></li>
+                        <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> {{ traobject.city }}</a></li>
+                    </ul>
+                </footer>
+            </div>
 
-    <a href="{{ path('traobject_index') }}">back to list</a>
+            <hr>
 
-    <a href="{{ path('traobject_edit', {'id': traobject.id}) }}">edit</a>
+            <h3>Commentaires</h3>
 
-    {{ include('traobject/_delete_form.html.twig') }}
+            <div class="alert alert-secondary" role="alert">
+                <p>Veuillez vous connecter afin de pouvoir laisser un commentaire</p>
+                <a href="login.html" class="btn btn-primary">
+                    <i class="fa fa-sign-in"></i>
+                    Me connecter
+                </a>
+            </div>
+
+            <ul class="list-unstyled">
+                <li class="media mb-1">
+                    <img class="mr-3" src="{{ asset('uploads/user-2.jpg') }}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">Jane Doe</h5>
+                        <p>Pourriez-vous préciser l'heure à laquelle vous l'avez perdu svp ? Il me semble avoir vu une personne le ramasser vers 17h30.</p>
+                    </div>
+                </li>
+                <li class="media mb-1">
+                    <img class="mr-3" src="{{ asset('uploads/user-1.jpg') }}" alt="John Doe">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">John Doe</h5>
+                        <p>Bonjour, je pense avoir trouvé votre portefeuille ce matin. Pourriez-vous m'envoyer votre nom et prénom par message privé svp afin que je puisse vous le remettre ?</p>
+                    </div>
+                </li>
+            </ul>
+
+            <a class="btn btn-sm"href="{{ path('traobject_index') }}"><i class="fa fa-chevron-left"></i> Retour à la liste</a>
+
+            <a class="btn btn-sm btn-warning text-dark" href="{{ path('traobject_edit', {'id': traobject.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
+
+            {{ include('traobject/_delete_form.html.twig') }}
+        </div>
+
+
+
+    </main>
+
+
+
 {% endblock %}

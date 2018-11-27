@@ -17,15 +17,15 @@
 
     {% block header %}
         <div class="fixed-top d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
-            <a href="{{ path('homepage') }}"><h5 class="my-0 mr-md-auto font-weight-normal">
+            <h5 class="my-0 mr-md-auto font-weight-normal">
         <span class="fa-stack fa-lg text-primary">
           <i class="fa fa-square fa-stack-2x"></i>
           <i class="fa fa-search fa-stack-1x fa-inverse"></i>
-        </span></a>
+        </span>
                 Traoùvé
             </h5>
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-dark" href="{{ path('homepage') }}">Accueil</a>
+                <a class="p-2 text-dark" href="">Accueil</a>
                 <a class="p-2 text-dark" href="{{ path('traobject_new') }}">Déposer une annonce</a>
                 <a class="p-2 text-dark" href="{{ path('traobject_index') }}">Objets perdus</a>
                 <a class="p-2 text-dark" href="{{ path('traobject_index') }}">Objets trouvés</a>
@@ -68,17 +68,16 @@
                     <h5>Catégories</h5>
                     <ul class="list-unstyled text-small">
                         {{ render(controller(
-                            'App\\Controller\\CategoryController::dropdowncategory'
+                            'App\\Controller\\CategoryController::categoryfooterlist'
                         )) }}
                     </ul>
                 </div>
                 <div class="col-6 col-md">
-                    <h5>Villes</h5>
+                    <h5>Départements</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Rennes</a></li>
-                        <li><a class="text-muted" href="#">Brest</a></li>
-                        <li><a class="text-muted" href="#">Vannes</a></li>
-                        <li><a class="text-muted" href="#">St Malo</a></li>
+                        {{ render(controller(
+                            'App\\Controller\\CountyController::countyfooterlist'
+                        )) }}
                     </ul>
                 </div>
                 <div class="col-6 col-md">

@@ -90,4 +90,13 @@ class CountyController extends AbstractController
 
         return $this->redirectToRoute('county_index');
     }
+
+    public function countyfooterlist()
+    {
+        $categories = $this->getDoctrine()->getRepository(County::class)->findAll();
+        return $this->render(
+            'default/categoryfooterlist.html.twig',
+            ['categories' => $categories]
+        );
+    }
 }

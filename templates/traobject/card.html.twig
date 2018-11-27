@@ -1,8 +1,16 @@
 <div class="card object-card">
                             <span class="badge badge-primary {{ traobject.state.color }}"><i
                                         class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
-    <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}"
-         alt=" {{ traobject.category.label }}">
+    <div class="card-logo-top" style="background-color: {{ traobject.category.color }};"><i
+                class="fa {{ traobject.category.icon }}"></i></div>
+
+    {% if traobject.picture %}
+        <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}"
+             alt=" {{ traobject.category.label }}">
+
+    {% else %}
+        <i class="fa {{ traobject.category.icon }}"></i>
+    {% endif %}
     <div class="card-body">
         <h5 class="card-title"> {{ traobject.title }}</h5>
         <ul class="object-features">
@@ -16,6 +24,7 @@
                             class="fa fa-map-marker"></i> {{ traobject.city }}</a></li>
         </ul>
     </div>
-    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i>
-        Afficher</a>
+    <a href="{{ path('traobject_show', {'id': traobject.id}) }}" class="card-footer-btn btn btn-primary"><i
+                class="fa fa-eye"></i>Afficher</a>
 </div>
+

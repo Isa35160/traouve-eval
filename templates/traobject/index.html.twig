@@ -27,7 +27,7 @@
             <tr>
                 <td>{{ traobject.title }}</td>
                 <td>{{ traobject.state.label }}</td>
-                <td><img class="img-thumbnail" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=""></td>
+                <td><img class="img-thumbnail-100" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=""></td>
                 <td>{{ traobject.description }}</td>
                 <td>{{ traobject.eventAt ? traobject.eventAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ traobject.dateEnd ? traobject.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
