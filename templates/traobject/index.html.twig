@@ -4,29 +4,30 @@
 
 {% block body %}
     <h1>Traobject index</h1>
-
-    <table class="table">
+<div class="container">
+    <a href="{{ path('traobject_new') }}" class="btn btn-sm btn-success">Ajouter un Traobject</a>
+    <table class="table table-sm">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Picture</th>
+                <th>Titre</th>
+                <th>Etat</th>
+                <th>Image</th>
                 <th>Description</th>
-                <th>EventAt</th>
-                <th>DateEnd</th>
-                <th>City</th>
-                <th>Address</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
+                <th>Date evenement</th>
+                <th>Date Fin</th>
+                <th>Ville</th>
+                <th>Adresse</th>
+                <th>Date création</th>
+                <th>Date de MAJ</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for traobject in traobjects %}
             <tr>
-                <td>{{ traobject.id }}</td>
                 <td>{{ traobject.title }}</td>
-                <td>{{ traobject.picture }}</td>
+                <td>{{ traobject.state.label }}</td>
+                <td><img class="img-thumbnail" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=""></td>
                 <td>{{ traobject.description }}</td>
                 <td>{{ traobject.eventAt ? traobject.eventAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ traobject.dateEnd ? traobject.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
@@ -35,8 +36,7 @@
                 <td>{{ traobject.createdAt ? traobject.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ traobject.updatedAt ? traobject.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('traobject_show', {'id': traobject.id}) }}">show</a>
-                    <a href="{{ path('traobject_edit', {'id': traobject.id}) }}">edit</a>
+                    <a href="{{ path('traobject_edit', {'id': traobject.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +47,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('traobject_new') }}">Create new</a>
+
+</div>
 {% endblock %}

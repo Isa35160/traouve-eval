@@ -7,7 +7,8 @@
         <header class="header-home">
             <div class="container header-home-container">
                 <h1>Traoùvé, premier service d'objets trouvés en Bretagne</h1>
-                <p>Déposez une annonce ou retrouvez un objet perdu grâce à notre communauté. Déjà <strong>4521</strong> objets retrouvés grâce à notre plateforme de mise en relation !</p>
+                <p>Déposez une annonce ou retrouvez un objet perdu grâce à notre communauté. Déjà <strong>4521</strong>
+                    objets retrouvés grâce à notre plateforme de mise en relation !</p>
                 <section class="row">
                     <article class="col-md-4">
                         <a class="btn btn-primary" href="form-lost.html">
@@ -31,103 +32,34 @@
             </div>
         </header>
 
+        <div class="container">
+            <h2>Les derniers objets trouvés</h2>
+            <section class="row">
+
+                {% for traobject in traobjects if traobject.state.label == 'Trouvé' %}
+                    <article class="col-md-3">
+                        {% include 'traobject/card.html.twig' %}
+                    </article>
+                {% endfor %}
 
 
-    <div class="container">
-        <section class="row">
-            <article class="col-md-3">
-                <div class="card object-card">
+            </section>
+        </div>
 
-                    {% for traobject in traobjects %}
+        <div class="container">
+            <br>
+            <h2>Les derniers objets perdus</h2>
+            <section class="row">
 
-                    <span class="badge badge-primary {{ traobject.state.color }}"><i class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
-                    <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=" {{ traobject.category.label }}">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{ traobject.title }}</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #dc143c;"><i class="fa {{ traobject.category.icon }}"></i> {{ traobject.category.label }}</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> {{ traobject.eventAt|date("d M Y") }}</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> {{ traobject.city }}</a></li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
+                {% for traobject in traobjects if traobject.state.label == 'Perdu' %}
+                    <article class="col-md-3">
+                        {% include 'traobject/card.html.twig' %}
+                    </article>
+                {% endfor %}
 
-            {% endfor %}
-                </div>
-            </article>
-        </section>
 
-        <h2>Les derniers objets trouvés</h2>
-        <section class="row">
-            <article class="col-md-3">
-                <div class="card object-card">
-                    <span class="badge badge-primary badge-found"><i class="fa fa-map-pin"></i> Trouvé</span>
-                    <img class="card-img-top" src="uploads/wallet.jpg" alt="Portefeuille">
-                    <div class="card-body">
-                        <h5 class="card-title">Portefeuille retrouvé à l'arrêt de bus</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #dc143c;"><i class="fa fa-money"></i> Portefeuille</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> 21/11/2018</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Rennes</a></li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
-                </div>
-            </article>
-            <article class="col-md-3">
-                <div class="card object-card">
-                    <span class="badge badge-primary badge-found"><i class="fa fa-map-pin"></i> Trouvé</span>
-                    <img class="card-img-top" src="uploads/keys.jpg" alt="Clés">
-                    <div class="card-body">
-                        <h5 class="card-title">Clés rue du général de Gaulle</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #1480dc;"><i class="fa fa-key"></i> Clés</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> 19/11/2018</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Brest</a></li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
-                </div>
-            </article>
-        </section>
-    </div>
-
-    <div class="container">
-        <h2>Les derniers objets perdus</h2>
-
-        <section class="row">
-            <article class="col-md-3">
-                <div class="card object-card">
-                    <span class="badge badge-primary badge-lost"><i class="fa fa-map-pin"></i> Perdu</span>
-                    <img class="card-img-top" src="uploads/teddy-bear.jpg" alt="Jouet">
-                    <div class="card-body">
-                        <h5 class="card-title">Ours en peluche à Sainte-Anne</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #dccd14;"><i class="fa fa-money"></i> Jouet</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> 19/11/2018</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Rennes</a></li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
-                </div>
-            </article>
-            <article class="col-md-3">
-                <div class="card object-card">
-                    <span class="badge badge-primary badge-lost"><i class="fa fa-map-pin"></i> Perdu</span>
-                    <div class="card-logo-top" style="background-color: #1480dc;"><i class="fa fa-key"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Clés perdues à l'IUT</h5>
-                        <ul class="object-features">
-                            <li><a href="#" class="badge" style="background-color: #1480dc;"><i class="fa fa-key"></i> Clés</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> 12/11/2018</a></li>
-                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> Vannes</a></li>
-                        </ul>
-                    </div>
-                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
-                </div>
-            </article>
-        </section>
-    </div>
+            </section>
+        </div>
 
     </main>
 

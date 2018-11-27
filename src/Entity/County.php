@@ -67,4 +67,8 @@ class County extends AbstractController
     }
 
 
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
 }

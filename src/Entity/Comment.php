@@ -110,5 +110,9 @@ class Comment extends AbstractController
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getContent();
+    }
 
 }

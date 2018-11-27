@@ -13,7 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ORM\Entity
  */
 class State extends AbstractController
+
+
 {
+    const FOUND ="Trouve";
+    const LOST ="Perdu";
+
     /**
      * @var int
      *
@@ -66,5 +71,9 @@ class State extends AbstractController
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
 
 }

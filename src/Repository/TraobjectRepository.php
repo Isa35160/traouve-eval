@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Traobject;
+use App\Entity\State;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -20,12 +22,13 @@ class TraobjectRepository extends ServiceEntityRepository
     }
 
 
-    public function findLast(int $limit): array
+    public function findTraobjectLost(int $limit) : array
     {
         $qb = $this->createQueryBuilder('t');
 
-        $qb = $qb->select('t')
+        $qb = $qb->select('t', 't.state')
             ->orderBy('t.createdAt', 'DESC')
+            ->where(State::LOST)
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
