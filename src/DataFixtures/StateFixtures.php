@@ -12,8 +12,8 @@ class StateFixtures extends Fixture
     public function load(ObjectManager $manager)
 
     { $states = [
-        ["Perdu", "fa-map-pin", "badge-lost"],
-        ["Trouvé", "fa-map-pin", "badge-lost"],
+        ["Perdu", "badge-lost"],
+        ["Trouvé", "badge-found"],
     ];
 
 

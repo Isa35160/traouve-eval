@@ -3,9 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Traobject;
-use App\Entity\User;
-use App\Entity\Category;
-use App\Entity\State;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -15,7 +12,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Traobject[]    findAll()
  * @method Traobject[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BookRepository extends ServiceEntityRepository
+class TraobjectRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -25,12 +22,13 @@ class BookRepository extends ServiceEntityRepository
 
     public function findLast(int $limit): array
     {
-        $qb = $this->createQueryBuilder('b');
+        $qb = $this->createQueryBuilder('t');
 
-        $qb = $qb->select('t', 'c')
-            ->innerJoin('user', 'c')
+        $qb = $qb->select('t')
             ->orderBy('t.createdAt', 'DESC')
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
-    }}
+    }
+
+}

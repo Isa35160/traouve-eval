@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traobject index{% endblock %}
+
+{% block body %}
+    <h1>Traobject index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Picture</th>
+                <th>Description</th>
+                <th>EventAt</th>
+                <th>DateEnd</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for traobject in traobjects %}
+            <tr>
+                <td>{{ traobject.id }}</td>
+                <td>{{ traobject.title }}</td>
+                <td>{{ traobject.picture }}</td>
+                <td>{{ traobject.description }}</td>
+                <td>{{ traobject.eventAt ? traobject.eventAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ traobject.dateEnd ? traobject.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ traobject.city }}</td>
+                <td>{{ traobject.address }}</td>
+                <td>{{ traobject.createdAt ? traobject.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ traobject.updatedAt ? traobject.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('traobject_show', {'id': traobject.id}) }}">show</a>
+                    <a href="{{ path('traobject_edit', {'id': traobject.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('traobject_new') }}">Create new</a>
+{% endblock %}

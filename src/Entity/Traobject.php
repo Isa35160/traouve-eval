@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Traobject
  *
  * @ORM\Table(name="traobject", indexes={@ORM\Index(name="fk_traobject_category_idx", columns={"category_id"}), @ORM\Index(name="fk_traobject_state1_idx", columns={"state_id"}), @ORM\Index(name="fk_traobject_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_traobject_county1_idx", columns={"county_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TraobjectRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Traobject

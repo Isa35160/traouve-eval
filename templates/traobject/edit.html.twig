@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Traobject{% endblock %}
+
+{% block body %}
+    <h1>Edit Traobject</h1>
+
+    {{ include('traobject/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('traobject_index') }}">back to list</a>
+
+    {{ include('traobject/_delete_form.html.twig') }}
+{% endblock %}

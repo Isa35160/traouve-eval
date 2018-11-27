@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Category
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Category
+class Category extends AbstractController
 {
     /**
      * @var int
@@ -41,6 +43,7 @@ class Category
      * @ORM\Column(name="color", type="string", length=255, nullable=false)
      */
     private $color;
+
 
     public function getId(): ?int
     {

@@ -1,7 +1,62 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+
+    <main class="main-content">
+
+        <header class="header-home">
+            <div class="container header-home-container">
+                <h1>Traoùvé, premier service d'objets trouvés en Bretagne</h1>
+                <p>Déposez une annonce ou retrouvez un objet perdu grâce à notre communauté. Déjà <strong>4521</strong> objets retrouvés grâce à notre plateforme de mise en relation !</p>
+                <section class="row">
+                    <article class="col-md-4">
+                        <a class="btn btn-primary" href="form-lost.html">
+                            <i class="fa fa-plus-circle"></i>
+                            <h2>Créer un avis de recherche</h2>
+                        </a>
+                    </article>
+                    <article class="col-md-4">
+                        <a class="btn btn-info" href="form-found.html">
+                            <i class="fa fa-map-pin"></i>
+                            <h2>Déclarer un objet trouvé</h2>
+                        </a>
+                    </article>
+                    <article class="col-md-4">
+                        <a class="btn btn-danger" href="form-search.html">
+                            <i class="fa fa-search"></i>
+                            <h2>Rechercher un objet perdu</h2>
+                        </a>
+                    </article>
+                </section>
+            </div>
+        </header>
+
+
+
     <div class="container">
+        <section class="row">
+            <article class="col-md-3">
+                <div class="card object-card">
+
+                    {% for traobject in traobjects %}
+
+                    <span class="badge badge-primary {{ traobject.state.color }}"><i class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
+                    <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=" {{ traobject.category.label }}">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ traobject.title }}</h5>
+                        <ul class="object-features">
+                            <li><a href="#" class="badge" style="background-color: #dc143c;"><i class="fa {{ traobject.category.icon }}"></i> {{ traobject.category.label }}</a></li>
+                            <li><a href="#" class="badge badge-info"><i class="fa fa-calendar"></i> {{ traobject.eventAt|date("d M Y") }}</a></li>
+                            <li><a href="#" class="badge badge-info"><i class="fa fa-map-marker"></i> {{ traobject.city }}</a></li>
+                        </ul>
+                    </div>
+                    <a href="object.html" class="card-footer-btn btn btn-primary"><i class="fa fa-eye"></i> Afficher</a>
+
+            {% endfor %}
+                </div>
+            </article>
+        </section>
+
         <h2>Les derniers objets trouvés</h2>
         <section class="row">
             <article class="col-md-3">
@@ -39,6 +94,7 @@
 
     <div class="container">
         <h2>Les derniers objets perdus</h2>
+
         <section class="row">
             <article class="col-md-3">
                 <div class="card object-card">
@@ -72,5 +128,7 @@
             </article>
         </section>
     </div>
+
+    </main>
 
 {% endblock %}
