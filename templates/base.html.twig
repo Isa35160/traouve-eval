@@ -25,15 +25,35 @@
                 Traoùvé
             </h5>
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-dark" href="">Accueil</a>
-                <a class="p-2 text-dark" href="{{ path('traobject_new') }}">Déposer une annonce</a>
-                <a class="p-2 text-dark" href="{{ path('traobject_index') }}">Objets perdus</a>
-                <a class="p-2 text-dark" href="{{ path('traobject_index') }}">Objets trouvés</a>
+                <a class="p-2 text-dark" href="{{ path('homepage') }}">Accueil</a>
+
+                {% if app.user %}
+                    <a class="p-2 text-dark" href="{{ path('traobject_new') }}">Déposer une annonce</a>
+                {% else %}
+                    <a class="p-2 text-dark" href="{{ path('user_registration') }}">Déposer une annonce</a>
+                {% endif %}
+
+                {#<a class="p-2 text-dark" href="{{ render(controller('App\\Controller\\TraobjectController::showbystate')) }}">Objets perdus</a>#}
+                {#<a class="p-2 text-dark" href="{{ render(controller('App\\Controller\\TraobjectController::showbystate(id)')) }}">Objets trouvés</a>#}
             </nav>
-            <a class="btn btn-outline-primary" href="{{ path('user_new') }}">
-                <i class="fa fa-user-plus"></i>
-                Créer un compte
-            </a>
+
+                {% if app.user %}
+                        <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">
+                            <i class="fa fa-sign-in"></i>
+                            Se déconnecter
+                        </a>
+                {% else %}
+                        <a class="btn btn-primary mr-2" href="{{ path('app_login') }}">
+                            <i class="fa fa-sign-in"></i>
+                            Se connecter
+                        </a>
+                        <a class="btn btn-outline-secondary" href="{{ path('user_registration') }}">
+                            <i class="fa fa-user-plus"></i>
+                            Créer un compte
+                        </a>
+                {% endif %}
+
+
         </div>
     {% endblock %}
 

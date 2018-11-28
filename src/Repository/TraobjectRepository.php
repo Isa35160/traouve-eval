@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Traobject;
 use App\Entity\State;
+use App\Entity\Category;
+use App\Entity\County;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -35,6 +37,23 @@ class TraobjectRepository extends ServiceEntityRepository
 
         return $qb->setParameter(':state', $state->getId())
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findTraobjectByState(State $state): array
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        $qb = $qb->select('t', 'c', 's')
+            ->innerJoin('t.category', 'c')
+            ->innerJoin('t.state', 's')
+            ->where($qb->expr()->eq('s.id', ':state'))
+            ->orderBy('t.createdAt', 'DESC');
+
+
+        return $qb->setParameter(':state', $state->getId())
             ->getQuery()
             ->getResult();
     }

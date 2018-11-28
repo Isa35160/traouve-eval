@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * Class CategoryController
+ * @package App\Controller
  * @Route("/category")
  */
 class CategoryController extends AbstractController
@@ -50,12 +53,14 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods="GET")
+     * @Route("/show/{id}", name="category_show", methods="GET")
      */
     public function show(Category $category): Response
     {
         return $this->render('category/show.html.twig', ['category' => $category]);
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="category_edit", methods="GET|POST")

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -43,6 +45,16 @@ class Category extends AbstractController
      * @ORM\Column(name="color", type="string", length=255, nullable=false)
      */
     private $color;
+
+    private $traobject;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->traobject = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -99,6 +111,34 @@ class Category extends AbstractController
     public function __toString()
     {
         return $this->getLabel();
+    }
+
+    /**
+     * @return Collection|Traobject[]
+     */
+    public function getTraobject(): Collection
+    {
+        return $this->getTraobject();
+    }
+
+    public function addTraobject(Traobject $traobject): self
+    {
+        if (!$this->traobject->contains($traobject)) {
+            $this->traobject[] = $traobject;
+            $traobject->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTraobject(Traobject $traobject): self
+    {
+        if ($this->traobject->contains($traobject)) {
+            $this->traobject->removeElement($traobject);
+            $traobject->removeCategory($this);
+        }
+
+        return $this;
     }
 
 }

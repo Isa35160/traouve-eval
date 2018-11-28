@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\State;
 use App\Entity\Traobject;
 use App\Form\TraobjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,6 +59,21 @@ class TraobjectController extends AbstractController
     {
         return $this->render('traobject/show.html.twig', ['traobject' => $traobject]);
     }
+
+
+    /**
+     * @Route("/{id}/show/{state}", name="traobject_traobjectstable", methods="GET")
+     */
+    public function showbystate(State $state)
+    {
+        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findTraobjectByState($state->getId());
+        return $this->render(
+            'traobject/traobjects_table.html.twig',
+            ['traobjects' => $traobjects,
+            'state' => $state,
+                ]);
+    }
+
 
     /**
      * @Route("/{id}/edit", name="traobject_edit", methods="GET|POST")

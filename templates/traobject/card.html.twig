@@ -1,15 +1,14 @@
 <div class="card object-card">
                             <span class="badge badge-primary {{ traobject.state.color }}"><i
                                         class="fa fa-map-pin"></i> {{ traobject.state.label }}</span>
-    <div class="card-logo-top" style="background-color: {{ traobject.category.color }};"><i
-                class="fa {{ traobject.category.icon }}"></i></div>
+
 
     {% if traobject.picture %}
-        <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}"
-             alt=" {{ traobject.category.label }}">
-
+        <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=" {{ traobject.category.label }}">
     {% else %}
-        <i class="fa {{ traobject.category.icon }}"></i>
+        <div class="card-logo-top" style="background-color: {{ traobject.category.color }};">
+            <i class="fa {{ traobject.category.icon }}"></i>
+        </div>
     {% endif %}
     <div class="card-body">
         <h5 class="card-title"> {{ traobject.title }}</h5>
@@ -18,7 +17,7 @@
                             class="fa {{ traobject.category.icon }}"></i> {{ traobject.category.label }}
                 </a></li>
             <li><a href="#" class="badge badge-info"><i
-                            class="fa fa-calendar"></i> {{ traobject.eventAt|date("d M Y") }}
+                            class="fa fa-calendar"></i> {{ traobject.eventAt|date("d/m/Y") }}
                 </a></li>
             <li><a href="#" class="badge badge-info"><i
                             class="fa fa-map-marker"></i> {{ traobject.city }}</a></li>

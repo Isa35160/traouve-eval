@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -12,7 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\TraobjectRepository")
  * @ORM\HasLifecycleCallbacks()
  */
+
 class Traobject
+
+
 {
     /**
      * @var int
@@ -99,6 +104,14 @@ class Traobject
      * })
      */
     private $category;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @var \County
@@ -256,9 +269,31 @@ class Traobject
         return $this;
     }
 
-    public function getCategory(): ?Category
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
     {
         return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->category->contains($category)) {
+            $this->category->removeElement($category);
+        }
+
+        return $this;
     }
 
     public function setCategory(?Category $category): self
@@ -303,6 +338,10 @@ class Traobject
 
         return $this;
     }
+
+
+
+
 
     public function __toString()
     {

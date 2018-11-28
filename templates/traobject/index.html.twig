@@ -29,12 +29,12 @@
                 <td>{{ traobject.state.label }}</td>
                 <td><img class="img-thumbnail-100" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=""></td>
                 <td>{{ traobject.description }}</td>
-                <td>{{ traobject.eventAt ? traobject.eventAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ traobject.dateEnd ? traobject.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ traobject.eventAt ? traobject.eventAt|date('d/m/Y') : '' }}</td>
+                <td>{{ traobject.dateEnd ? traobject.dateEnd|date('d/m/Y') : '' }}</td>
                 <td>{{ traobject.city }}</td>
                 <td>{{ traobject.address }}</td>
-                <td>{{ traobject.createdAt ? traobject.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ traobject.updatedAt ? traobject.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ traobject.createdAt ? traobject.createdAt|date('d/m/Y') : '' }}</td>
+                <td>{{ traobject.updatedAt ? traobject.updatedAt|date('d/m/Y') : '' }}</td>
                 <td>
                     <a href="{{ path('traobject_edit', {'id': traobject.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
                 </td>
