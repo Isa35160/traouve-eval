@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-use Closure;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Traversable;
 
 
 /**
@@ -81,9 +79,6 @@ class Traobject extends AbstractController
     private $address;
 
 
-
-
-
     /**
      * @var \DateTime
      *
@@ -98,8 +93,9 @@ class Traobject extends AbstractController
      */
     private $updatedAt;
 
+
     /**
-     * @var \Category
+     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumns({
@@ -276,7 +272,7 @@ class Traobject extends AbstractController
     /**
      * @return Collection|Category[]
      */
-    public function getCategory(): ?Category
+    public function getCategory(): Collection
     {
         return $this->category;
     }

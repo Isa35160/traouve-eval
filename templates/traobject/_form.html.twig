@@ -1,6 +1,14 @@
 
 
 {{ form_start(form) }}
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active show" id="found-tab" data-toggle="tab" href="#found" role="tab" aria-controls="found" aria-selected="true">Objet trouvé</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="lost-tab" data-toggle="tab" href="#lost" role="tab" aria-controls="lost" aria-selected="false">Objet perdu</a>
+    </li>
+</ul>
     {{ form_widget(form) }}
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

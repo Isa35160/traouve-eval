@@ -46,6 +46,13 @@ class Category extends AbstractController
      */
     private $color;
 
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Traobject", mappedBy="category")
+     */
+
     private $traobject;
 
     /**

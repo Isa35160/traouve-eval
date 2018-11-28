@@ -9,7 +9,7 @@
         {% for traobject in category.traobject %}
 
             <article class="col-md-3">
-                {% include 'traobject/card.html.twig' %}
+                {% include 'traobject/card.html.twig' with {'traobject': traobject} %}
             </article>
 
         {% endfor %}
