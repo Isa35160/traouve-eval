@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
+use Closure;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Traversable;
 
 
 /**
@@ -15,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\HasLifecycleCallbacks()
  */
 
-class Traobject
+class Traobject extends AbstractController
 
 
 {
@@ -273,7 +276,7 @@ class Traobject
     /**
      * @return Collection|Category[]
      */
-    public function getCategory(): Collection
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
@@ -340,12 +343,11 @@ class Traobject
     }
 
 
-
-
-
     public function __toString()
     {
         return $this->getTitle();
     }
+
+
 
 }

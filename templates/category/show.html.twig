@@ -4,14 +4,14 @@
 
 {% block body %}
     <div class="container mt-5">
-    <h1 class="mt-5 pt-5">{{ category.label }}</h1>
+        <h1 class="mt-5 pt-5">{{ category.label }}</h1>
 
-    {% for traobject in category.traobject %}
+        {% for traobject in category.traobject %}
 
-        <article class="col-md-3">
-            {% include 'traobject/card.html.twig'%}
-        </article>
+            <article class="col-md-3">
+                {% include 'traobject/card.html.twig' %}
+            </article>
 
-    {% endfor %}
+        {% endfor %}
     </div>
 {% endblock %}
