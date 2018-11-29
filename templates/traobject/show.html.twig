@@ -21,7 +21,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{{ asset('uploads/' ~ traobject.picture) }}" class="img-thumbnail" alt="{{ traobject.category.label }}">
+
+                            {% if traobject.picture %}
+                                <img class="card-img-top" src="{{ asset('uploads/' ~ traobject.picture) }}" alt=" {{ traobject.category.label }}">
+                            {% else %}
+                                <div class="card-logo-top" style="background-color: {{ traobject.category.color }};">
+                                    <i class="fa {{ traobject.category.icon }}"></i>
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="col-md-8">
                             <p>{{ traobject.description }}</p>
@@ -40,14 +47,19 @@
             <hr>
 
             <h3>Commentaires</h3>
-
+            {% if app.user %}
+            <div class="alert alert-secondary" role="alert">
+                <textarea class="form-control" name="" id="" cols="30" rows="3" placeholder="Veuillez saisir votre commentaire ici"></textarea>
+            </div>
+            {% else %}
             <div class="alert alert-secondary" role="alert">
                 <p>Veuillez vous connecter afin de pouvoir laisser un commentaire</p>
-                <a href="login.html" class="btn btn-primary">
+                <a href="{{ path('app_login') }}" class="btn btn-primary">
                     <i class="fa fa-sign-in"></i>
                     Me connecter
                 </a>
             </div>
+            {% endif %}
 
             <ul class="list-unstyled">
                 <li class="media mb-1">

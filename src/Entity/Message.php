@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ORM\Table(name="message", indexes={@ORM\Index(name="fk_message_user1_idx", columns={"user_form"}), @ORM\Index(name="fk_message_user2_idx", columns={"user_to"})})
  * @ORM\Entity
  */
-class Message extends AbstractController
+class Message
 {
     /**
      * @var int

@@ -1,16 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Traobjet{% endblock %}
+{% block title %}Nouvelle annonce{% endblock %}
 
 {% block body %}
-
-<div class="container mt-5">
-    <h1 class="pt-3">Déposer une annonce</h1>
-
-    {{ include('traobject/_form.html.twig') }}
-
-    <a href="{{ path('traobject_index') }}">Retour à la liste</a>
-
-</div>
+    <div class="container">
+        <h1 class="mt-5 pt-5">Déposer une annonce</h1>
+        <br>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="found-tab" data-toggle="tab" href="#found" role="tab" aria-controls="found"
+                   aria-selected="true">Objet trouvé</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="lost-tab" data-toggle="tab" href="#lost" role="tab" aria-controls="lost"
+                   aria-selected="false">Objet perdu</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="found" role="tabpanel" aria-labelledby="found-tab">
+                <h2>J'ai trouvé un objet</h2>
+                {% include 'traobject/_form.html.twig' with {'form': formFound, 'state': 'found'} only %}
+            </div>
+            <div class="tab-pane fade" id="lost" role="tabpanel" aria-labelledby="lost-tab">
+                <h2>J'ai perdu un objet</h2>
+                {% include 'traobject/_form.html.twig' with {'form': formLost, 'state': 'lost'} only %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

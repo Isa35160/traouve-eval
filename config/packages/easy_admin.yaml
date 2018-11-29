@@ -1,9 +1,108 @@
 easy_admin:
-  site_name: 'Traobject Admin'
+  site_name: 'Traouvé Admin <a class="btn btn-dark btn-lg" href="../" ><i class="fa fa-home"></i> Retour sur le site </a>'
   design:
     brand_color: '#EB6864'
+  formats:
+      datetime: 'd/m/Y'
   entities:
-    - App\Entity\Traobject
-    - App\Entity\Category
-    - App\Entity\User
-    - App\Entity\County
+    Traobject:
+        class: App\Entity\Traobject
+        label: 'TraObjects'
+        list:
+          fields:
+            - { property: 'id', type: 'int'}
+            - { property: 'title', type: 'text', label: 'Titre' }
+            - { property: 'picture', type: 'image', base_path: '%app.path.uploads_dir%', label: 'Image' }
+            - { property: 'event_at', type: 'datetime', label: 'Date Evenement'}
+            - { property: 'category', label: 'Catégorie'}
+            - { property: 'city', type: 'text', label: 'Ville'}
+            - { property: 'state', label: 'Etat'}
+            - { property: 'county', label: 'Département'}
+            - { property: 'description', type: 'textarea', label: 'Description'}
+        show:
+          fields:
+            - { property: 'title', type: 'text', label: 'Titre' }
+            - { property: 'picture', type: 'image', base_path: '%app.path.uploads_dir%', label: 'Image' }
+            - { property: 'event_at', type: 'datetime', label: 'Date évenement' }
+            - { property: 'updated_at', type: 'datetime', label: 'Date MAJ'}
+            - { property: 'category', label: 'Catégorie'}
+            - { property: 'city', type: 'text', label: 'Ville'}
+            - { property: 'state', label: 'Etat'}
+            - { property: 'county', label: 'Département'}
+            - { property: 'description', type: 'textarea', label: 'Description'}
+        form:
+          fields:
+            - { property: 'title', type: 'text' }
+            - { property: 'pictureFile', type: 'vich_image' }
+            - { property: 'event_at', type: 'datetime' }
+            - { property: 'updated_at', type: 'datetime', label: 'Date MAJ'}
+            - { property: 'category', label: 'Catégorie'}
+            - { property: 'city', type: 'text' }
+            - { property: 'state',  label: 'Etat' }
+            - { property: 'county', label: 'Département'}
+            - { property: 'description', type: 'textarea', label: 'Description'}
+
+    User:
+        class: App\Entity\User
+        label: 'Utilisateur'
+        list:
+          fields:
+            - { property: 'id', type: 'int'}
+            - { property: 'firstname', type: 'text', label: 'Prénom' }
+            - { property: 'lastname', type: 'text', label: 'Nom' }
+            - { property: 'email', type: 'email', label: 'Email' }
+
+          show:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'firstname', type: 'text', label: 'Prénom' }
+              - { property: 'lastname', type: 'text', label: 'Nom' }
+              - { property: 'email', type: 'email', label: 'Email' }
+          form:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'image', base_path: '%app.path.uploads_dir%', label: 'Image'}
+              - { property: 'firstname', type: 'text', label: 'Prénom' }
+              - { property: 'lastname', type: 'text', label: 'Nom' }
+              - { property: 'email', type: 'email', label: 'Email' }
+    Category:
+        class: App\Entity\Category
+        label: 'Categories'
+        list:
+          fields:
+            - { property: 'id', type: 'int'}
+            - { property: 'label', type: 'text', label: 'Libellé' }
+            - { property: 'icon', type: 'text', label: 'Icone' }
+            - { property: 'color', type: 'text', label: 'Couleur' }
+
+          edit:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'label', type: 'text', label: 'Libellé' }
+              - { property: 'icon', type: 'text', label: 'Icone' }
+              - { property: 'color', type: 'text', label: 'Couleur' }
+          form:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'label', type: 'text', label: 'Libellé' }
+              - { property: 'icon', type: 'text', label: 'Icone' }
+              - { property: 'color', type: 'text', label: 'Couleur' }
+    County:
+        class: App\Entity\County
+        label: 'Départements'
+        list:
+          fields:
+            - { property: 'id', type: 'int'}
+            - { property: 'label', type: 'text', label: 'Libellé' }
+            - { property: 'zipcode', type: 'bigint', label: 'CP' }
+
+          edit:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'label', type: 'text', label: 'Libellé' }
+              - { property: 'zipcode', type: 'bigint', label: 'CP' }
+          form:
+            fields:
+              - { property: 'id', type: 'int'}
+              - { property: 'label', type: 'text', label: 'Libellé' }
+              - { property: 'zipcode', type: 'bigint', label: 'CP' }

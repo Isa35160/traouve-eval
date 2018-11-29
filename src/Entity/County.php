@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ORM\Table(name="county")
  * @ORM\Entity
  */
-class County extends AbstractController
+class County
 {
     /**
      * @var int

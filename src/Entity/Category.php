@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Category extends AbstractController
+class Category
 {
     /**
      * @var int
@@ -46,7 +45,6 @@ class Category extends AbstractController
      */
     private $color;
 
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -59,9 +57,8 @@ class Category extends AbstractController
      */
     public function __construct()
     {
-        $this->traobject = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->traobject = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -105,46 +102,21 @@ class Category extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="category_show")
+     * @return Collection|Traobject[]
      */
-    public function show(Category $category)
+    public function getTraobject(): Collection
     {
-        return $this->render('category/show.html.twig', [
-            'category' => $category
-        ]);
+        return $this->traobject;
+    }
+
+    public function setTraobject(Collection $traobject): void
+    {
+        $this->traobject = $traobject;
     }
 
     public function __toString()
     {
         return $this->getLabel();
-    }
-
-    /**
-     * @return Collection|Traobject[]
-     */
-    public function getTraobject(): Collection
-    {
-        return $this->getTraobject();
-    }
-
-    public function addTraobject(Traobject $traobject): self
-    {
-        if (!$this->traobject->contains($traobject)) {
-            $this->traobject[] = $traobject;
-            $traobject->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTraobject(Traobject $traobject): self
-    {
-        if ($this->traobject->contains($traobject)) {
-            $this->traobject->removeElement($traobject);
-            $traobject->setCategory(null);
-        }
-
-        return $this;
     }
 
 }

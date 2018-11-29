@@ -29,18 +29,25 @@ class TraobjectController extends BaseController
     }
 
     /**
-     * @Route("/{id}/new", name="traobject_new", methods="GET|POST")
+     * @Route("/new", name="traobject_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
         $traobject = new Traobject();
         $form = $this->createForm(TraobjectType::class, $traobject);
         $form->handleRequest($request);
-        $traobject->setUser($this->getUser());
-        $traobject->getState();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($request->get('state') == "found") {
+                $state = $this->getDoctrine()->getRepository(State::class)->findOneBy(["label" => State::FOUND]);
+            } else {
+                $state = $this->getDoctrine()->getRepository(State::class)->findOneBy(["label" => State::LOST]);
+            }
+            $traobject->setState($state);
+            $traobject->setUser($this->getUser());
+
             $em->persist($traobject);
             $em->flush();
 
@@ -49,7 +56,8 @@ class TraobjectController extends BaseController
 
         return $this->render('traobject/new.html.twig', [
             'traobject' => $traobject,
-            'form' => $form->createView(),
+            'formFound' => $form->createView(),
+            'formLost' => $form->createView(),
         ]);
     }
 
@@ -59,20 +67,6 @@ class TraobjectController extends BaseController
     public function show(Traobject $traobject): Response
     {
         return $this->render('traobject/show.html.twig', ['traobject' => $traobject]);
-    }
-
-
-    /**
-     * @Route("/{id}/show/{state}", name="traobject_traobjectstable", methods="GET")
-     */
-    public function showbystate(State $state)
-    {
-        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findTraobjectByState($state->getId());
-        return $this->render(
-            'traobjects_found.html.twig',
-            ['traobjects' => $traobjects,
-            'state' => $state,
-                ]);
     }
 
 

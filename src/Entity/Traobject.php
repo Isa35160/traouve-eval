@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Traobject
@@ -14,9 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @ORM\Table(name="traobject", indexes={@ORM\Index(name="fk_traobject_category_idx", columns={"category_id"}), @ORM\Index(name="fk_traobject_state1_idx", columns={"state_id"}), @ORM\Index(name="fk_traobject_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_traobject_county1_idx", columns={"county_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\TraobjectRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable()
  */
 
-class Traobject extends AbstractController
+class Traobject
 
 
 {
@@ -42,6 +41,12 @@ class Traobject extends AbstractController
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="traobject_pictures", fileNameProperty="picture")
+     * @var File
+     */
+    private $pictureFile;
 
     /**
      * @var string|null
@@ -260,6 +265,26 @@ class Traobject extends AbstractController
         return $this;
     }
 
+    /**
+     * @return File
+     */
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @param File|null $image
+     * @throws \Exception
+     */
+    public function setPictureFile(File $picture = null)
+    {
+        $this->pictureFile = $picture;
+
+        if ($picture) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
 
     /**
      * @return Category
@@ -318,6 +343,11 @@ class Traobject extends AbstractController
         return $this->getTitle();
     }
 
-
-
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
 }

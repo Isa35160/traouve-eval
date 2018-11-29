@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_comment_traobject1_idx", columns={"traobject_id"})})
  * @ORM\Entity
  */
-class Comment extends AbstractController
+class Comment
 {
     /**
      * @var int
