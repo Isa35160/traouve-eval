@@ -13,3 +13,4 @@ require('../css/app.scss');
 // var $ = require('jquery');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+

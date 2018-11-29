@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\State;
+use App\Entity\Traobject;
 use App\Form\StateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,12 +49,14 @@ class StateController extends BaseController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="state_show", methods="GET")
+     * @Route("/show/{id}", name="state_show", methods="GET")
      */
     public function show(State $state): Response
     {
-        return $this->render('state/show.html.twig', ['state' => $state]);
+        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findBy(["state" => $state]);
+        return $this->render('state/show.html.twig', ['state' => $state, "traobjects" => $traobjects]);
     }
 
     /**
@@ -88,6 +91,15 @@ class StateController extends BaseController
         }
 
         return $this->redirectToRoute('state_index');
+    }
+
+    public function stateheaderlinks()
+    {
+        $states = $this->getDoctrine()->getRepository(State::class)->findAll();
+        return $this->render(
+            'default/stateheaderlinks.html.twig',
+            ['states' => $states]
+        );
     }
 
 

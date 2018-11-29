@@ -1,0 +1,5 @@
+{% for state in states %}
+        <a class="p-2 text-dark" href="{{ path('state_show', {'id' : state.id}) }}">
+            Objets {{ state.label }}s
+        </a>
+{% endfor %}

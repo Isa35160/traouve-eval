@@ -29,20 +29,22 @@ class TraobjectController extends BaseController
     }
 
     /**
-     * @Route("/new", name="traobject_new", methods="GET|POST")
+     * @Route("/{id}/new", name="traobject_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
         $traobject = new Traobject();
         $form = $this->createForm(TraobjectType::class, $traobject);
         $form->handleRequest($request);
+        $traobject->setUser($this->getUser());
+        $traobject->getState();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($traobject);
             $em->flush();
 
-            return $this->redirectToRoute('traobject_index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('traobject/new.html.twig', [
