@@ -6,14 +6,13 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\State;
 use App\Entity\Traobject;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class DefaultController
  * @package App\Controller
  */
-class DefaultController extends AbstractController
+class DefaultController extends BaseController
 {
     /**
      * @Route("/", name="homepage")

@@ -52,7 +52,6 @@ class Category extends AbstractController
      *
      * @ORM\OneToMany(targetEntity="Traobject", mappedBy="category")
      */
-
     private $traobject;
 
     /**
@@ -132,7 +131,7 @@ class Category extends AbstractController
     {
         if (!$this->traobject->contains($traobject)) {
             $this->traobject[] = $traobject;
-            $traobject->addCategory($this);
+            $traobject->setCategory($this);
         }
 
         return $this;
@@ -142,7 +141,7 @@ class Category extends AbstractController
     {
         if ($this->traobject->contains($traobject)) {
             $this->traobject->removeElement($traobject);
-            $traobject->removeCategory($this);
+            $traobject->setCategory(null);
         }
 
         return $this;

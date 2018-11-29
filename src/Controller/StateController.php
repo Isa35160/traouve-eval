@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\State;
 use App\Form\StateType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/state")
  */
-class StateController extends AbstractController
+class StateController extends BaseController
 {
     /**
      * @Route("/", name="state_index", methods="GET")

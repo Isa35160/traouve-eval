@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\State;
 use App\Entity\Traobject;
 use App\Form\TraobjectType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller
  * @Route("/traobject")
  */
-class TraobjectController extends AbstractController
+class TraobjectController extends BaseController
 {
     /**
      * @Route("/", name="traobject_index", methods="GET")
@@ -68,7 +67,7 @@ class TraobjectController extends AbstractController
     {
         $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findTraobjectByState($state->getId());
         return $this->render(
-            'traobject/traobjects_table.html.twig',
+            'traobjects_found.html.twig',
             ['traobjects' => $traobjects,
             'state' => $state,
                 ]);

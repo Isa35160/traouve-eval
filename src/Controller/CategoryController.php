@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Traobject;
 use App\Form\CategoryType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller
  * @Route("/category")
  */
-class CategoryController extends AbstractController
+class CategoryController extends BaseController
 {
     /**
      * @Route("/", name="category_index", methods="GET")
@@ -57,7 +57,8 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', ['category' => $category]);
+        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findBy(["category" => $category]);
+        return $this->render('category/show.html.twig', ['category' => $category, "traobjects" => $traobjects]);
     }
 
 

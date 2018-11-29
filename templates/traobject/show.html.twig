@@ -6,6 +6,10 @@
     <main class="main-content">
 
         <div class="container">
+
+            <a class="btn btn-outline-secondary"href="{{ path('homepage') }}"><i class="fa fa-chevron-left"></i> Retour à la l'Accueil</a>
+            <br>
+            <br>
             <div class="card object-card">
                 <h1 class="card-header">
                 <span class="badge badge-primary {{ traobject.state.color }}">
@@ -61,10 +65,6 @@
                     </div>
                 </li>
             </ul>
-
-            <a class="btn btn-sm"href="{{ path('traobject_index') }}"><i class="fa fa-chevron-left"></i> Retour à la liste</a>
-
-            <a class="btn btn-sm btn-warning text-dark" href="{{ path('traobject_edit', {'id': traobject.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
 
             {{ include('traobject/_delete_form.html.twig') }}
         </div>

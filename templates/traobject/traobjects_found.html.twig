@@ -7,18 +7,6 @@
         <h1 class="mt-5 pt-5">{{ category.label }}</h1>
 
         {% if traobjects %}
-            <h2>Objets perdus</h2>
-
-            <div class="row">
-                {% for traobject in traobjects if traobject.state=='Perdu' %}
-                    <article class="col-md-3">
-                        {% include 'traobject/card.html.twig' with {'traobject': traobject} %}
-                    </article>
-                {% else %}
-                    Aucun objets trouvés dans la catégorie {{ category.label }}
-                {% endfor %}
-            </div>
-
             <h2>Objets trouvés</h2>
 
             <div class="row">
@@ -31,7 +19,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            Aucun objets trouvés dans la catégorie {{ category.label }}
+            Aucun objets trouvés
 
         {% endif %}
 

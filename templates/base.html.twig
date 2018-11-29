@@ -32,12 +32,17 @@
                 {% else %}
                     <a class="p-2 text-dark" href="{{ path('user_registration') }}">Déposer une annonce</a>
                 {% endif %}
-
                 {#<a class="p-2 text-dark" href="{{ render(controller('App\\Controller\\TraobjectController::showbystate')) }}">Objets perdus</a>#}
                 {#<a class="p-2 text-dark" href="{{ render(controller('App\\Controller\\TraobjectController::showbystate(id)')) }}">Objets trouvés</a>#}
             </nav>
 
                 {% if app.user %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a class="btn btn-outline-dark mr-2" href="{{ path('admin') }}">
+                            <i class="fa fa-unlock"></i>
+                            Admin
+                        </a>
+                    {% endif %}
                         <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">
                             <i class="fa fa-sign-in"></i>
                             Se déconnecter

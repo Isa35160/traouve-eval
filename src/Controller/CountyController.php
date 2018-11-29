@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\County;
+use App\Entity\Traobject;
 use App\Form\CountyType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/county")
  */
-class CountyController extends AbstractController
+class CountyController extends BaseController
 {
     /**
      * @Route("/", name="county_index", methods="GET")
@@ -49,12 +49,14 @@ class CountyController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="county_show", methods="GET")
+     * @Route("/show/{id}", name="county_show", methods="GET")
      */
     public function show(County $county): Response
     {
-        return $this->render('county/show.html.twig', ['county' => $county]);
+        $traobjects = $this->getDoctrine()->getRepository(Traobject::class)->findBy(["county" => $county]);
+        return $this->render('county/show.html.twig', ['county' => $county, "traobjects" => $traobjects]);
     }
 
     /**
@@ -95,7 +97,7 @@ class CountyController extends AbstractController
     {
         $categories = $this->getDoctrine()->getRepository(County::class)->findAll();
         return $this->render(
-            'default/categoryfooterlist.html.twig',
+            'default/countyfooterlist.html.twig',
             ['categories' => $categories]
         );
     }
